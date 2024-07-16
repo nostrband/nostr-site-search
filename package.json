@@ -1,5 +1,5 @@
 {
-  "name": "nostr-site-search-test",
+  "name": "nostr-site-search",
   "version": "1.0.1",
   "description": "Nostr Site Search",
   "main": "./dist/index.js",
