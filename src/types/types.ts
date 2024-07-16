@@ -1,17 +1,21 @@
 export interface Author {
-  id: number
+  id: string
   name: string
+  image: string
+  url: string
 }
 
 export interface Tag {
-  id: number
+  id: string
   name: string
+  url: string
 }
 
 export interface Post {
-  id: number
+  id: string
   title: string
   description: string
+  url: string
 }
 
 export interface Data {

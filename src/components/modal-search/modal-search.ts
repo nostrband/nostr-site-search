@@ -1,16 +1,19 @@
 import { LitElement, TemplateResult, css, html, nothing } from 'lit'
-import { customElement, state } from 'lit/decorators.js'
+import { customElement, property, state } from 'lit/decorators.js'
 import { TWStyles } from '../../modules/tw/twlit'
-import { data } from '../../utils/const'
-import { Author, Post, Tag } from '../../types/types'
+import { Author, Data, Post, Tag } from '../../types/types'
 import { highlightSearch } from './utils'
 
 @customElement('ns-modal-search')
 export class ModalSearch extends LitElement {
   static styles = [css``, TWStyles]
 
-  @state()
-  private _items = data
+  @property({ attribute: false })
+  public items: Data = {
+    authors: [],
+    posts: [],
+    tags: [],
+  }
 
   @state()
   private _searchValue: string = ''
@@ -19,9 +22,14 @@ export class ModalSearch extends LitElement {
     this._searchValue = event.detail
   }
 
+  private _handleGoto(url: string) {
+    console.log('search goto', url)
+    document.dispatchEvent(new CustomEvent('np-search-goto', { detail: url }))
+  }
+
   sectionTemplate(title: string, children: TemplateResult[] | TemplateResult) {
     return html`<div class="border-t border-neutral-200 py-3 px-4 sm:px-7">
-      <h1 class="uppercase text-xs text-neutral-400 font-semibold mb-1 tracking-wide">${title}</h1>
+      <h1 class="uppercase text-sm text-neutral-400 font-semibold mb-1 tracking-wide">${title}</h1>
       ${children}
     </div> `
   }
@@ -29,24 +37,26 @@ export class ModalSearch extends LitElement {
   authorsTemplate(authors: Author[]) {
     return authors.map((author) => {
       return html`<div
+        @click=${() => this._handleGoto(author.url)}
         class="py-[1rem] -mx-4 sm:-mx-7 px-4 sm:px-5 cursor-pointer flex items-center hover:bg-neutral-100"
       >
         <div class="rounded-full bg-neutral-200 w-7 h-7 mr-2 flex items-center justify-center font-bold">
           <span class="text-neutral-400">${author.name.at(0)}</span>
         </div>
-        <h2 class="text-[1rem] font-medium leading-tight text-neutral-900 truncate">${author.name}</h2>
+        <h2 class="text-[1.25rem] font-medium leading-tight text-neutral-900 truncate">${author.name}</h2>
       </div>`
     })
   }
 
   tagsTemplate(tags: Tag[]) {
     return tags.map((tag) => {
-      return html`
-        <div class="flex items-center py-3 -mx-4 sm:-mx-7 px-4 sm:px-5 cursor-pointer hover:bg-neutral-100">
-          <p class="mr-2 text-sm font-bold text-neutral-400">#</p>
-          <h2 class="text-[1rem] font-medium leading-tight text-neutral-900 truncate">${tag.name}</h2>
-        </div>
-      `
+      return html`<div
+        @click=${() => this._handleGoto(tag.url)}
+        class="flex items-center py-3 -mx-4 sm:-mx-7 px-4 sm:px-5 cursor-pointer hover:bg-neutral-100"
+      >
+        <p class="mr-2 text-sm font-bold text-neutral-400">#</p>
+        <h2 class="text-[1.25rem] font-medium leading-tight text-neutral-900 truncate">${tag.name}</h2>
+      </div> `
     })
   }
 
@@ -54,9 +64,10 @@ export class ModalSearch extends LitElement {
     const showMore = posts.length > 10
     return html`
       ${posts.map((post) => {
-        return html`
-      <div class="py-3 -mx-4 sm:-mx-7 px-4 sm:px-5 cursor-pointer hover:bg-neutral-100"">
-      <h2 class="text-[1rem] font-medium leading-tight text-neutral-800">
+        return html`<div @click=${() => this._handleGoto(post.url)}
+        class="py-3 -mx-4 sm:-mx-7 px-4 sm:px-5 cursor-pointer hover:bg-neutral-100""
+    >
+      <h2 class="text-[1.25rem] font-medium leading-tight text-neutral-800">
         ${highlightSearch(post.title, this._searchValue)}
       </h2>
       ${
@@ -80,13 +91,13 @@ export class ModalSearch extends LitElement {
   }
 
   renderSearchResults() {
-    const query = this._searchValue
+    const query = this._searchValue.toLocaleLowerCase()
 
     if (!query.length) return nothing
 
-    const authors = this._items.authors.filter((author) => author.name.toLowerCase().includes(query))
-    const tags = this._items.tags.filter((tag) => tag.name.toLowerCase().includes(query))
-    const posts = this._items.posts.filter(
+    const authors = this.items.authors.filter((author) => author.name.toLowerCase().includes(query))
+    const tags = this.items.tags.filter((tag) => tag.name.toLowerCase().includes(query))
+    const posts = this.items.posts.filter(
       (post) => post.title.toLowerCase().includes(query) || post.description.toLowerCase().includes(query)
     )
 

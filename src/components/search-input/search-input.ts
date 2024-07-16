@@ -2,10 +2,13 @@ import { html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { Icons } from '../../assets/icons'
 import { TWStyles } from '../../modules/tw/twlit'
+import { createRef, Ref, ref } from 'lit/directives/ref.js'
 
 @customElement('ns-search-input')
 export class SearchInput extends LitElement {
   static styles = [TWStyles]
+
+  private inputRef: Ref<HTMLInputElement> = createRef()
 
   @property({ type: 'String' }) value = ''
 
@@ -13,7 +16,12 @@ export class SearchInput extends LitElement {
     const content = isEntered
       ? html`<button alt="Clear" class="-mb-[1px]" @click=${this._handleClear}>${Icons.clear}</button>`
       : Icons.search
-    return html`<div class="flex items-center justify-center w-4 h-4 mr-3">${content}</div>`
+    return html`<div class="flex items-center justify-center w-6 h-6 mr-3">${content}</div>`
+  }
+
+  firstUpdated() {
+    const input = this.inputRef.value!;
+    input.focus();
   }
 
   render() {
@@ -24,13 +32,14 @@ export class SearchInput extends LitElement {
       <div class="z-10 relative flex items-center py-5 px-4 sm:px-7 bg-white ${classes}">
         ${this.iconButtonTemplate(isEntered)}
         <input
-          class="grow -my-5 py-5 -ml-3 pl-3 text-[1rem] focus-visible:outline-none placeholder:text-gray-400 outline-none truncate"
+          class="grow -my-5 py-5 -ml-3 pl-3 text-[1.5rem] focus-visible:outline-none placeholder:text-gray-400 outline-none truncate"
           placeholder="Search posts, tags and authors"
           id="search-input"
+          ${ref(this.inputRef)}
           .value=${this.value}
           @input=${this._handleInput}
         />
-        <button class="ml-3 text-sm text-neutral-500 sm:hidden" alt="Cancel" @click=${this._handleCancel}>
+        <button class="ml-3 text-[1.05rem] text-neutral-500" alt="Cancel" @click=${this._handleCancel}>
           Cancel
         </button>
       </div>

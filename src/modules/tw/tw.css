@@ -690,6 +690,10 @@ video {
   height: 1rem;
 }
 
+.h-6 {
+  height: 1.5rem;
+}
+
 .h-7 {
   height: 1.75rem;
 }
@@ -708,6 +712,10 @@ video {
 
 .w-4 {
   width: 1rem;
+}
+
+.w-6 {
+  width: 1.5rem;
 }
 
 .w-7 {
@@ -952,8 +960,25 @@ video {
   padding-top: 5rem;
 }
 
+.text-\[1\.05rem\] {
+  font-size: 1.05rem;
+}
+
+.text-\[1\.25rem\] {
+  font-size: 1.25rem;
+}
+
+.text-\[1\.5rem\] {
+  font-size: 1.5rem;
+}
+
 .text-\[1rem\] {
   font-size: 1rem;
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .text-sm {
@@ -1124,10 +1149,6 @@ video {
   .sm\:-mx-7 {
     margin-left: -1.75rem;
     margin-right: -1.75rem;
-  }
-
-  .sm\:hidden {
-    display: none;
   }
 
   .sm\:max-h-\[70vh\] {
