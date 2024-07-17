@@ -16,21 +16,24 @@ export async function getData(): Promise<Data> {
   const posts = (
     await store.list({
       type: 'posts',
+      limit: 1000,
     })
   ).posts
   const tags = (
     await store.list({
       type: 'tags',
+      limit: 100,
     })
   ).tags
   const authors = (
     await store.list({
       type: 'authors',
+      limit: 100,
     })
   ).authors
   console.log('search res', { posts, tags, authors })
   const data = {
-    posts: posts.map((p) => ({ id: p.id, title: p.title || '', description: p.excerpt || '', url: p.url })),
+    posts: posts.map((p) => ({ id: p.id, title: p.title || '', description: p.excerpt || '', markdown: p.markdown || "", url: p.url })),
     tags: tags.map((t) => ({ id: t.id, name: t.name || '', url: t.url })),
     authors: authors.map((a) => ({ id: a.id, name: a.name || '', image: a.profile_image || '', url: a.url })),
   }

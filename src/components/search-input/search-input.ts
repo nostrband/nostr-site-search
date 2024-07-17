@@ -20,8 +20,8 @@ export class SearchInput extends LitElement {
   }
 
   firstUpdated() {
-    const input = this.inputRef.value!;
-    input.focus();
+    const input = this.inputRef.value!
+    input.focus()
   }
 
   render() {
@@ -37,13 +37,19 @@ export class SearchInput extends LitElement {
           id="search-input"
           ${ref(this.inputRef)}
           .value=${this.value}
+          @keydown=${this._handleKeyDown}
           @input=${this._handleInput}
         />
-        <button class="ml-3 text-[1.05rem] text-neutral-500" alt="Cancel" @click=${this._handleCancel}>
-          Cancel
-        </button>
+        <button class="ml-3 text-[1.05rem] text-neutral-500" alt="Cancel" @click=${this._handleCancel}>Cancel</button>
       </div>
     `
+  }
+
+  private _handleKeyDown(e: KeyboardEvent) {
+    if (e.code === 'Escape') {
+      e.preventDefault()
+      this._handleCancel()
+    }
   }
 
   private _handleInput(e: Event) {

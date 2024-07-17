@@ -109,7 +109,7 @@ export class ModalSearch extends LitElement {
     const authors = this.items.authors.filter((author) => author.name.toLowerCase().includes(query))
     const tags = this.items.tags.filter((tag) => tag.name.toLowerCase().includes(query))
     const posts = this.items.posts.filter(
-      (post) => post.title.toLowerCase().includes(query) || post.description.toLowerCase().includes(query)
+      (post) => post.title.toLowerCase().includes(query) || post.markdown.toLowerCase().includes(query)
     )
 
     const noResultsFound = authors.length === 0 && tags.length === 0 && posts.length === 0

@@ -19,30 +19,35 @@ export const sampleData: Data = {
       id: "1",
       title: 'BitMEX Pleads Guilty to Bank Secrecy Act Violation in AML Case',
       description: 'BitMEX pleads guilty to violating the Bank Secrecy Act...',
+      markdown: 'BitMEX pleads guilty to violating the Bank Secrecy Act and some longer text',
       url: '/p1'
     },
     {
       id: "2",
       title: "Bitfarms Appoints New CEO Amidst Riot's Intensifying Takeover Attempt",
       description: 'Bitfarms has appointed Ben Gagnon as CEO amidst a...',
+      markdown: 'Bitfarms has appointed Ben Gagnon as CEO amidst a...',
       url: '/p2'
     },
     {
       id: "3",
       title: "3 Bitfarms Appoints New CEO Amidst Riot's Intensifying Takeover Attempt",
       description: 'Bitfarms has appointed Ben Gagnon as CEO amidst a...',
+      markdown: 'Bitfarms has appointed Ben Gagnon as CEO amidst a...',
       url: '/p3'
     },
     {
       id: "4",
       title: "4 Bitfarms Appoints New CEO Amidst Riot's Intensifying Takeover Attempt",
       description: 'Bitfarms has appointed Ben Gagnon as CEO amidst a...',
+      markdown: 'Bitfarms has appointed Ben Gagnon as CEO amidst a...',
       url: '/p4'
     },
     {
       id: "5",
       title: "5 Bitfarms Appoints New CEO Amidst Riot's Intensifying Takeover Attempt",
       description: 'Bitfarms has appointed Ben Gagnon as CEO amidst a...',
+      markdown: 'Bitfarms has appointed Ben Gagnon as CEO amidst and longer text',
       url: '/p5'
     },
   ],
