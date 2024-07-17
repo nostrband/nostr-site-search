@@ -10,8 +10,10 @@ export function highlightSearch(text: string, search: string): TemplateResult {
 
 export async function getData(): Promise<Data> {
   // @ts-ignore
-  const store = window.nostrSite.store
-  if (!store) throw new Error('No window.nostrSite')
+  const { store, tabReady } = await window.nostrSite
+
+  await tabReady
+  console.log("tab ready for search");
 
   const posts = (
     await store.list({
@@ -33,7 +35,13 @@ export async function getData(): Promise<Data> {
   ).authors
   console.log('search res', { posts, tags, authors })
   const data = {
-    posts: posts.map((p) => ({ id: p.id, title: p.title || '', description: p.excerpt || '', markdown: p.markdown || "", url: p.url })),
+    posts: posts.map((p) => ({
+      id: p.id,
+      title: p.title || '',
+      description: p.excerpt || '',
+      markdown: p.markdown || '',
+      url: p.url,
+    })),
     tags: tags.map((t) => ({ id: t.id, name: t.name || '', url: t.url })),
     authors: authors.map((a) => ({ id: a.id, name: a.name || '', image: a.profile_image || '', url: a.url })),
   }
