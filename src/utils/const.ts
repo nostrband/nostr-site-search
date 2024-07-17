@@ -27,5 +27,23 @@ export const sampleData: Data = {
       description: 'Bitfarms has appointed Ben Gagnon as CEO amidst a...',
       url: '/p2'
     },
+    {
+      id: "3",
+      title: "3 Bitfarms Appoints New CEO Amidst Riot's Intensifying Takeover Attempt",
+      description: 'Bitfarms has appointed Ben Gagnon as CEO amidst a...',
+      url: '/p3'
+    },
+    {
+      id: "4",
+      title: "4 Bitfarms Appoints New CEO Amidst Riot's Intensifying Takeover Attempt",
+      description: 'Bitfarms has appointed Ben Gagnon as CEO amidst a...',
+      url: '/p4'
+    },
+    {
+      id: "5",
+      title: "5 Bitfarms Appoints New CEO Amidst Riot's Intensifying Takeover Attempt",
+      description: 'Bitfarms has appointed Ben Gagnon as CEO amidst a...',
+      url: '/p5'
+    },
   ],
 }

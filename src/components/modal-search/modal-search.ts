@@ -4,6 +4,8 @@ import { TWStyles } from '../../modules/tw/twlit'
 import { Author, Data, Post, Tag } from '../../types/types'
 import { highlightSearch } from './utils'
 
+const DEFAULT_LIMIT = 10
+
 @customElement('ns-modal-search')
 export class ModalSearch extends LitElement {
   static styles = [css``, TWStyles]
@@ -18,13 +20,21 @@ export class ModalSearch extends LitElement {
   @state()
   private _searchValue: string = ''
 
+  @state()
+  private _limit: number = DEFAULT_LIMIT
+
   private _handleSearchInputChange(event: CustomEvent): void {
     this._searchValue = event.detail
+    this._limit = DEFAULT_LIMIT
   }
 
   private _handleGoto(url: string) {
     console.log('search goto', url)
     document.dispatchEvent(new CustomEvent('np-search-goto', { detail: url }))
+  }
+
+  private _handleMore() {
+    this._limit += DEFAULT_LIMIT
   }
 
   sectionTemplate(title: string, children: TemplateResult[] | TemplateResult) {
@@ -61,9 +71,9 @@ export class ModalSearch extends LitElement {
   }
 
   postsTemplate(posts: Post[]) {
-    const showMore = posts.length > 10
+    const showMore = posts.length > this._limit
     return html`
-      ${posts.map((post) => {
+      ${posts.slice(0, Math.min(posts.length, this._limit)).map((post) => {
         return html`<div @click=${() => this._handleGoto(post.url)}
         class="py-3 -mx-4 sm:-mx-7 px-4 sm:px-5 cursor-pointer hover:bg-neutral-100""
     >
@@ -82,6 +92,7 @@ export class ModalSearch extends LitElement {
       })}
       ${showMore
         ? html`<button
+            @click=${() => this._handleMore()}
             class="w-full my-3 p-[1rem] border border-neutral-200 hover:border-neutral-300 text-neutral-800 hover:text-black font-semibold rounded transition duration-150 ease hover:ease"
           >
             Show more results
