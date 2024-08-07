@@ -5,8 +5,15 @@ import { sampleData } from './utils/const'
 
 const BUTTON_SELECTOR = '[data-ghost-search]'
 
-function initModal() {
+async function initModal() {
   console.log('search initModal')
+
+  // @ts-ignore
+  if (!window.nostrSite) {
+    console.log("search waiting for npLoad");
+    await new Promise<Event>((ok) => document.addEventListener("npLoad", ok));
+  }
+
   const searchButtons = document.querySelectorAll(BUTTON_SELECTOR)
   searchButtons.forEach((searchButton) => {
     const test = searchButton.getAttribute('data-nostr-site-search-test') === 'true'
