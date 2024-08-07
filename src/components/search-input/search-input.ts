@@ -32,7 +32,7 @@ export class SearchInput extends LitElement {
       <div class="z-10 relative flex items-center py-5 px-4 sm:px-7 bg-white ${classes}">
         ${this.iconButtonTemplate(isEntered)}
         <input
-          class="grow -my-5 py-5 -ml-3 pl-3 text-[1.5rem] focus-visible:outline-none placeholder:text-gray-400 outline-none truncate"
+          class="grow -my-5 py-5 -ml-3 pl-3 text-[1.5rem] focus-visible:outline-none placeholder:text-gray-400 outline-none truncate text-black"
           placeholder="Search posts, tags and authors"
           id="search-input"
           ${ref(this.inputRef)}
