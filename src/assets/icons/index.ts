@@ -4,9 +4,9 @@ export const Icons = {
   clear: html` <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    height="16"
-    width="16"
-    class="text-neutral-900 hover:text-neutral-500 h-[0.75rem] w-[0.75rem]"
+    height="14"
+    width="14"
+    class="text-neutral-900 hover:text-neutral-500"
   >
     <path
       stroke-linecap="round"
