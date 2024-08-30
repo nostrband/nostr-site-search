@@ -16,7 +16,7 @@ export class SearchInput extends LitElement {
     const content = isEntered
       ? html`<button alt="Clear" class="-mb-[1px]" @click=${this._handleClear}>${Icons.clear}</button>`
       : Icons.search
-    return html`<div class="flex items-center justify-center w-6 h-6 mr-3">${content}</div>`
+    return html`<div class="flex items-center justify-center w-[24px] h-[24px] mr-[12px]">${content}</div>`
   }
 
   firstUpdated() {
@@ -29,10 +29,10 @@ export class SearchInput extends LitElement {
     const classes = isEntered ? 'rounded-t-lg shadow' : 'rounded-lg'
 
     return html`
-      <div class="z-10 relative flex items-center py-5 px-4 sm:px-7 bg-white ${classes}">
+      <div class="z-10 relative flex items-center py-[20px] px-[16px] sm:px-[28px] bg-white ${classes}">
         ${this.iconButtonTemplate(isEntered)}
         <input
-          class="grow -my-5 py-5 -ml-3 pl-3 text-[1.5rem] focus-visible:outline-none placeholder:text-gray-400 outline-none truncate text-black"
+          class="grow -my-[20px] py-[20px] -ml-[12px] pl-[12px] text-[16px] sm:text-[18px] focus-visible:outline-none placeholder:text-gray-400 outline-none truncate text-black"
           placeholder="Search posts, tags and authors"
           id="search-input"
           ${ref(this.inputRef)}
@@ -40,7 +40,9 @@ export class SearchInput extends LitElement {
           @keydown=${this._handleKeyDown}
           @input=${this._handleInput}
         />
-        <button class="ml-3 text-[1.05rem] text-neutral-500" alt="Cancel" @click=${this._handleCancel}>Cancel</button>
+        <button class="ml-[12px] text-[14px] sm:text-[16px] text-neutral-500" alt="Cancel" @click=${this._handleCancel}>
+          Cancel
+        </button>
       </div>
     `
   }
